@@ -1,23 +1,20 @@
-import AcaoBotao from "./botao";
-import { adicionarMoto, getMotos } from "./moto";
+"use client";
+import { useState } from "react";
 
-export default async function CrudPage() {
-  const motos = await getMotos();
+async function listarMotos() {
+  const resposta = await fetch("http://localhost:3000/api/nomes");
+  return resposta.json();
+}
+
+export default async function Motos() {
+  const data = await listarMotos();
 
   return (
     <div>
-      <div>
-        <h2>Lista de Motos</h2>
-        <ul>
-          {motos.map((moto: string) => (
-            <li key={moto}>{moto}</li>
-          ))}
-        </ul>
-      </div>
-
-      <form action={adicionarMoto.bind(null, "Ducati")}>
-        <AcaoBotao />
-      </form>
+      <h1 className="font-bold text-xl">Lista de Motos</h1>
+      {data.nomes.map((motos: { id: number; nome: string }) => (
+        <p key={motos.id}>{motos.nome}</p>
+      ))}
     </div>
   );
 }
