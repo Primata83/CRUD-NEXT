@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { AdicionarMoto } from "./adicionarMoto";
+import { EditarMoto } from "./ediarMoto";
 
 type Moto = {
   id: number;
@@ -21,12 +22,12 @@ export default function PaginaMotos() {
   }, []);
 
   return (
-    <div>
-      <h1 className="font-bold text-xl mb-3">Lista de Motos</h1>
+    <div className="bg-gray-700 p-6">
+      <h1 className="font-bold text-2xl mb-6 ">Lista de Motos</h1>
       <AdicionarMoto />
       <div>
         {motos.map((moto) => (
-          <p key={moto.id}>{moto.nome}</p>
+          <EditarMoto key={moto.id} id={moto.id} nomeAtual={moto.nome} />
         ))}
       </div>
     </div>
