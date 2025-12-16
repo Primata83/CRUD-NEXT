@@ -1,20 +1,34 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { AdicionarMoto } from "./adicionarMoto";
 
-async function listarMotos() {
-  const resposta = await fetch("http://localhost:3000/api/nomes");
-  return resposta.json();
-}
+type Moto = {
+  id: number;
+  nome: string;
+};
 
-export default async function Motos() {
-  const data = await listarMotos();
+export default function PaginaMotos() {
+  const [motos, setMotos] = useState<Moto[]>([]);
+
+  useEffect(() => {
+    async function buscarMotos() {
+      const resposta = await fetch("http://localhost:3000/api/nomes");
+      const data = await resposta.json();
+      setMotos(data.nomes);
+    }
+
+    buscarMotos();
+  }, []);
 
   return (
     <div>
-      <h1 className="font-bold text-xl">Lista de Motos</h1>
-      {data.nomes.map((motos: { id: number; nome: string }) => (
-        <p key={motos.id}>{motos.nome}</p>
-      ))}
+      <h1 className="font-bold text-xl mb-3">Lista de Motos</h1>
+      <AdicionarMoto />
+      <div>
+        {motos.map((moto) => (
+          <p key={moto.id}>{moto.nome}</p>
+        ))}
+      </div>
     </div>
   );
 }
