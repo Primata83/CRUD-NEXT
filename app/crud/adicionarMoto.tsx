@@ -2,14 +2,13 @@
 import { useState } from "react";
 
 export function AdicionarMoto() {
-  //nome = valor atual e setNome altera esse estado
+  //nome = valor atual e setNome altera esse estado junto ao useState
   const [nome, setNome] = useState("");
 
   async function adicionarMoto() {
-    // faz o javaScript esperar a resposta do servidor antes de continuar.
-    // guarda o objeto da resposta (não é o JSON ainda, é um objeto
-    // dispara uma requisição HTTP para a URL que voce passar.
-    // transforma o corpo da resposta em JSON, que é o que você realmente quer usar.
+    //O Disparo (O Lado Direito): O JavaScript lê primeiro o fetch("url"). Ele "telefona" para o servidor. Nesse exato milésimo de segundo, ele cria uma Promise (a promessa).
+    //A Pausa (O Meio): O await entra em cena. Ele diz: "JavaScript, pare tudo nesta função e espere essa promessa ser cumprida!". A execução fica suspensa aqui.
+    //A Entrega (O Lado Esquerdo): Quando o servidor responde, a promessa é resolvida. O "embrulho" (objeto Response) chega e, só agora, o sinal de igual (=) funciona, guardando tudo dentro da const resposta.
     const resposta = await fetch("http://localhost:3000/api/nomes", {
       //"POST" envia dados para criar um novo recurso
       method: "POST",
