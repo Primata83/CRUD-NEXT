@@ -9,7 +9,7 @@ export function AdicionarMoto() {
     //O Disparo (O Lado Direito): O JavaScript lê primeiro o fetch("url"). Ele "telefona" para o servidor. Nesse exato milésimo de segundo, ele cria uma Promise (a promessa).
     //A Pausa (O Meio): O await entra em cena. Ele diz: "JavaScript, pare tudo nesta função e espere essa promessa ser cumprida!". A execução fica suspensa aqui.
     //A Entrega (O Lado Esquerdo): Quando o servidor responde, a promessa é resolvida. O "embrulho" (objeto Response) chega e, só agora, o sinal de igual (=) funciona, guardando tudo dentro da const resposta.
-    const resposta = await fetch("http://localhost:3000/api/nomes", {
+    const resposta = await fetch("http://localhost:3000/api/motos", {
       //"POST" envia dados para criar um novo recurso
       method: "POST",
       // headers são mais informaçoes enviadas junto da requisição

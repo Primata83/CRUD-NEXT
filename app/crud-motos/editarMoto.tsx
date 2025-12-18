@@ -18,7 +18,7 @@ export function EditarMoto({ id, nomeAtual, onExcluir }: Props) {
   async function editarMoto() {
     // O await pausa a execução até o servidor responder
     // quando a promessa do fetch é resolvida, recebemos um objeto Response e ele é atribuído a variavel.
-    await fetch(`http://localhost:3000/api/nomes/${id}`, {
+    await fetch(`http://localhost:3000/api/motos/${id}`, {
       //"PATCH" envia dados para criar um novo recurso
       method: "PATCH",
       // headers são mais informaçoes enviadas junto da requisição
@@ -43,7 +43,7 @@ export function EditarMoto({ id, nomeAtual, onExcluir }: Props) {
     if (confirmacao) {
       // O await pausa a execução até o servidor responder
       // quando a promessa do fetch é resolvida, recebemos um objeto Response e ele é atribuído a variavel.
-      await fetch(`http://localhost:3000/api/nomes/${id}`, {
+      await fetch(`http://localhost:3000/api/motos/${id}`, {
         // metodo HTTP DELETE: indica ao servidor que o recurso deve ser removido
         method: "DELETE",
       });
