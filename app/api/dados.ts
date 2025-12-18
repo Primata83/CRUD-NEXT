@@ -16,6 +16,7 @@ if (!globalForState.motosState) {
       { id: 1, nome: "Suzuki" },
       { id: 2, nome: "Yamaha" },
       { id: 3, nome: "Kawasaki" },
+      { id: 4, nome: "BMW" },
     ],
     // getter que calcula dinamicamente o proximo id disponivel
     // se existirem motos: retorna o maior id atual +1

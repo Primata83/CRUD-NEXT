@@ -49,7 +49,7 @@ export function AdicionarMoto() {
         onChange={(e) => setNome(e.target.value)}
         className="mb-5"
       />
-      <button className="cursor-pointer" onClick={adicionarMoto}>
+      <button className="cursor-pointer ml-3" onClick={adicionarMoto}>
         Adicionar
       </button>
     </div>
