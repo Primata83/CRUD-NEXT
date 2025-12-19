@@ -1,9 +1,11 @@
-// define o tipo de dados do estado da aplicação. Nomes do objeto com id e idCounter, propriedade somente leitura que gera o proximo id
+// define o tipo de dados do estado da aplicação. Nomes do objeto com id e idCounter,
+// propriedade somente leitura que gera o proximo id
 type StateType = {
   nomes: { id: number; nome: string }[];
-  readonly idCounter: number;
+  idCounter: number;
 };
-// exteção do objeto global (globalThis) para armazenar o estado das motos. Isso permite que o estado persista entre diferentes requisições durante o runtime da aplicação
+// exteção do objeto global (globalThis) para armazenar o estado das motos.
+// Isso permite que o estado persista entre diferentes requisições durante o runtime da aplicação
 // (util em desenvolvimento e ambiente serverless)
 const globalForState = globalThis as unknown as {
   motosState?: StateType;

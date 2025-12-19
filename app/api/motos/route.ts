@@ -8,15 +8,17 @@ export async function GET() {
     //array com todas as motos armazenadas no state
   });
 }
-
+// recebe no corpo da requisição um objeto com a propriedade 'nome'
+// e adiciona uma nova moto ao array state com id unico
 export async function POST(req: any) {
-  //recebe no corpo da requisição um objeto com a propriedade 'nome' e adiciona uma nova moto ao array state com id unico
+  // req = objeto da requisição contendo o corpo com os dados da moto
   const body = await req.json();
-  //req = objeto da requisição contendo o corpo com os dados da moto
+  // constante que extrai as variavel do body
   const nome = body.nome;
-  // extrai o nome da moto do corpo da requisição
+  // adiciona a nova moto ao array state com um id unico e incremental
+  // (aqui se usa o contador atual do estado)
   state.nomes.push({ id: state.idCounter, nome });
-  //adiciona uma nova moto ao array com id incremental
+  // retorna uma resposta confirmando que a operação foi concluida
   return Response.json({
     mensagem: "Moto Adicionada",
   });
