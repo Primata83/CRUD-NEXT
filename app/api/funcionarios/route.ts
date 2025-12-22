@@ -5,7 +5,7 @@ export async function GET() {
   return Response.json({
     mensagem: "Lista de Funcionarios",
     // array com todos os nomes armazenados no ''state''
-    funcionarios: state.funcionarios,
+    funcionario: state.funcionario,
   });
 }
 
@@ -15,7 +15,7 @@ export async function POST(req: any) {
   const { nome, endereco, dataNascimento, cargo } = body;
   // adiciona um funcionario ao array state com um id unico e incremental
   // (aqui se usa o contador atual do estado)
-  state.funcionarios.push({
+  state.funcionario.push({
     id: state.idCounter,
     nome,
     endereco,

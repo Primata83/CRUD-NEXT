@@ -1,6 +1,6 @@
 import state from "../../dados";
 
-//recebe o id da moto via parametro de rota e o nome do corpo na requisição.
+// recebe o id da moto via parametro de rota e o nome do corpo na requisição.
 // busca moto pelo id, atualiza seu nome e retorna a confirmação com a lista atualizada
 export async function PATCH(
   // req objeto da requisiçãocontendo o corpo com o novo nome
@@ -12,14 +12,14 @@ export async function PATCH(
   const params = await context.params;
   // converte o id da string para numero inteiro
   const idMoto = parseInt(params.id);
-  // parseia o corpoda requisição para extrair o novo nome
+  // parseia o corpo da requisição para extrair o novo nome
   const body = await req.json();
   const novoNome = body.nomeNovo;
-  // busca o indice da moto no array pelo id (url)
+  // analisa e converte (parsear) o indice da moto no array pelo id (url)
   const index = state.nomes.findIndex((moto) => moto.id === idMoto);
   // verifica se a moto foi encontrada (indice diferente de -1)
   if (index !== -1) {
-    //atualiza a moto mantendo o id original e alterando apenas o nome
+    // atualiza a moto mantendo o id original e alterando apenas o nome
     // usa spread operator (...) para preservar outras propriedades se existirem
     state.nomes[index] = { ...state.nomes[index], nome: novoNome };
     // retorna a confirmação da atualização com alista completa atualizada

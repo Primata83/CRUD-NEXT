@@ -1,7 +1,7 @@
 // define o tipo de dados do estado da aplicação. Nomes do objeto com id e idCounter,
 // propriedade somente de leitura que gera o proximo id
 type StateType = {
-  funcionarios: {
+  funcionario: {
     id: number;
     nome: string;
     endereco: string;
@@ -14,13 +14,13 @@ type StateType = {
 // isto permite que o estado persista entre diferentes requisições durante o runtime da aplicação
 // (util em desenvolvimento e ambiente serverless)
 const globalForState = globalThis as unknown as {
-  funcionariosState?: StateType;
+  funcionarioState?: StateType;
 };
 // inicialização do estado global, verifica se o estado ja existe no objeto global.
 // se não existir, cria um novo estado com os dados iniciais.
-if (!globalForState.funcionariosState) {
-  globalForState.funcionariosState = {
-    funcionarios: [
+if (!globalForState.funcionarioState) {
+  globalForState.funcionarioState = {
+    funcionario: [
       {
         id: 1,
         nome: "Hudson Cleiton de Paula",
@@ -33,8 +33,8 @@ if (!globalForState.funcionariosState) {
     // se existir motos: retorna o maior id atual +1
     // se não existir motos retorna 1
     get idCounter() {
-      return this.funcionarios.length > 0
-        ? Math.max(...this.funcionarios.map((f) => f.id)) + 1
+      return this.funcionario.length > 0
+        ? Math.max(...this.funcionario.map((f) => f.id)) + 1
         : 1;
     },
   };
@@ -42,5 +42,5 @@ if (!globalForState.funcionariosState) {
 // exporta a referencia ao estado global para ser usado nos endpoints
 // todos os endpoints compartilham a mesma instancia do estado
 
-const state = globalForState.funcionariosState;
+const state = globalForState.funcionarioState;
 export default state;
