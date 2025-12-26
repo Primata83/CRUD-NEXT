@@ -12,7 +12,7 @@ export async function PATCH(
   const params = await context.params;
   // converte o id da string para numero inteiro
   const idMoto = parseInt(params.id);
-  // parseia o corpo da requisição para extrair o novo nome
+  // converte o corpo da requisição de string JSON para um objeto javascript
   const body = await req.json();
   const novoNome = body.nomeNovo;
   // localiza a posição (índice) da moto no array através do ID

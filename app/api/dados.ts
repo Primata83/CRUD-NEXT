@@ -30,7 +30,7 @@ if (!globalForState.motosState) {
     },
   };
 }
-// exporta a referencia ao esta global para ser usado nos endpoints
+// exporta a referencia ao estado global para ser usado nos endpoints
 // todos os endpoits compartilham a mesma instancia do estado
 const state = globalForState.motosState;
 

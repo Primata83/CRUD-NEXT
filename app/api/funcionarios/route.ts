@@ -8,8 +8,8 @@ export async function GET() {
     funcionario: state.funcionario,
   });
 }
-
 export async function POST(req: any) {
+  // req = objeto da requisição contendo o corpo com os dados dos funcionarios
   const body = await req.json();
   // constante que extrai as variaveis do body
   const { nome, endereco, dataNascimento, cargo } = body;
