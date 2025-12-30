@@ -1,7 +1,7 @@
 // define o tipo de dados do estado da aplicação. Nomes do objeto com id e idCounter,
 // propriedade somente leitura que gera o proximo id
 type StateType = {
-  nomes: { id: number; nome: string }[];
+  nomes: { id: number; nome: string; cilindrada: number }[];
   idCounter: number;
 };
 // exteção do objeto global (globalThis) para armazenar o estado das motos.
@@ -15,10 +15,9 @@ const globalForState = globalThis as unknown as {
 if (!globalForState.motosState) {
   globalForState.motosState = {
     nomes: [
-      { id: 1, nome: "Suzuki" },
-      { id: 2, nome: "Yamaha" },
-      { id: 3, nome: "Kawasaki" },
-      { id: 4, nome: "BMW" },
+      { id: 1, nome: "Suzuki", cilindrada: 1200 },
+      { id: 2, nome: "Yamaha", cilindrada: 600 },
+      { id: 3, nome: "Kawasaki", cilindrada: 600 },
     ],
     // getter que calcula dinamicamente o proximo id disponivel
     // se existirem motos: retorna o maior id atual +1
