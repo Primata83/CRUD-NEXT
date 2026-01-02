@@ -11,45 +11,50 @@ export async function PATCH(
   // aguarda a resolução da promisse dos paremetros da rota
   const params = await context.params;
   // converte o id da string para numero inteiro
-  const idMoto = parseInt(params.id);
+  const idFabricante = parseInt(params.id);
   // converte o corpo da requisição de string JSON para um objeto javascript
-  const body = await req.json();
-  const novoNome = body.nomeNovo;
+
+  const dadosAtualizados = await req.json();
   // localiza a posição (índice) da moto no array através do ID
-  const index = state.nomes.findIndex((moto) => moto.id === idMoto);
-  // verifica se a moto foi encontrada (indice diferente de -1)
+  const index = state.fabricante.findIndex(
+    (fabricante) => fabricante.id === idFabricante
+  );
+  // verifica se a fabricante foi encontrada (indice diferente de -1)
   if (index !== -1) {
-    // atualiza a moto mantendo o id original e alterando apenas o nome
+    // atualiza a fabricante mantendo o id original e alterando apenas o nome
     // usa spread operator (...) para preservar outras propriedades se existirem
-    state.nomes[index] = { ...state.nomes[index], nome: novoNome };
+    state.fabricante[index] = {
+      ...state.fabricante[index],
+      ...dadosAtualizados,
+    };
     // retorna a confirmação da atualização com a lista completa atualizada
     return Response.json({
-      mensagem: `Moto com ID ${idMoto} atualizada para ${novoNome}!`,
-      listaAtual: state.nomes,
+      mensagem: `Fabricante com ID ${idFabricante} atualizado!`,
+      listaAtual: state.fabricante,
     });
   }
 }
-// recebe o id da moto via parametro (url)
+// recebe o id da fabricante via parametro (url)
 export async function DELETE(
   // req objeto da requisição
   req: Request,
-  // context = contexto da rota contendo parametros (id da moto)
+  // context = contexto da rota contendo parametros (id da fabricante)
   context: { params: Promise<{ id: string }> }
 ) {
   // desestrutura e guarda resoluçao da promisse dos parametros
   const { id } = await context.params;
   // converte o id da string para numeros inteiros
   const deletarID = parseInt(id);
-  // busca o indice da moto no array pelo ID
-  const index = state.nomes.findIndex((m) => m.id === deletarID);
-  // armazena a referencia da moto que sera removida (para dar resposta)
-  const remover = state.nomes[index];
+  // busca o indice da fabricante no array pelo ID
+  const index = state.fabricante.findIndex((m) => m.id === deletarID);
+  // armazena a referencia da fabricante que sera removida (para dar resposta)
+  const remover = state.fabricante[index];
   // splice(index 1) remove 1 elemento a partir do indice especificado
-  state.nomes.splice(index, 1);
-  // retorna a confirmação da exclusão com os dados da moto removida
+  state.fabricante.splice(index, 1);
+  // retorna a confirmação da exclusão com os dados da fabricante removida
   return Response.json({
-    mensagem: `Moto com ID ${deletarID} deletada com sucesso.`,
+    mensagem: `Fabricante com ID ${deletarID} deletada com sucesso.`,
     remover,
-    listaAtual: state.nomes,
+    listaAtual: state.fabricante,
   });
 }
