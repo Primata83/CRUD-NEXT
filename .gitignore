@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Docker database data
+pgdata/
+
+# Environment variables (senhas e configs sensíveis)
+.env
