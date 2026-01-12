@@ -7,7 +7,6 @@ export async function GET() {
     return Response.json(result.rows);
   } catch (err) {
     console.error("GET erro:", err);
-    return new Response("Erro ao buscar fabricantes", { status: 500 });
   }
 }
 
@@ -24,6 +23,5 @@ export async function POST(request: Request) {
     return Response.json(result.rows[0]);
   } catch (err) {
     console.error("POST erro:", err);
-    return new Response("Erro ao criar fabricante", { status: 500 });
   }
 }
