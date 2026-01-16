@@ -11,7 +11,7 @@ export async function PUT(
     const { fabricante, cilindrada } = await request.json();
 
     if (isNaN(motoId)) {
-      return new Response("ID inválido", { status: 400 });
+      return new Response("ID invalido", { status: 400 });
     }
 
     const result = await db.query(
@@ -40,7 +40,7 @@ export async function DELETE(
     const motoId = parseInt(id, 10);
 
     if (isNaN(motoId)) {
-      return new Response("ID inválido", { status: 400 });
+      return new Response("ID invalido", { status: 400 });
     }
 
     const result = await db.query(

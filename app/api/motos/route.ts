@@ -7,6 +7,7 @@ export async function GET() {
     return Response.json(result.rows);
   } catch (err) {
     console.error("GET erro:", err);
+    return new Response("Erro ao buscar motos", { status: 500 });
   }
 }
 
