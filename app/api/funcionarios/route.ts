@@ -15,10 +15,9 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const { nome, endereco, dataNascimento, cargo } = await request.json();
-
     const result = await db.query(
       "INSERT INTO funcionarios (nome, endereco, dataNascimento, cargo) VALUES ($1, $2, $3, $4) RETURNING *",
-      [nome, endereco, dataNascimento, cargo]
+      [nome, endereco, dataNascimento, cargo],
     );
 
     return Response.json(result.rows[0]);

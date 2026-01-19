@@ -1,3 +1,4 @@
+// PUT @@@@@@@@@@@@@@@@@@@@@@@
 import db from "@/lib/db";
 
 export async function PUT(
@@ -29,7 +30,7 @@ export async function PUT(
     return new Response("Erro ao atualizar funcionario", { status: 500 });
   }
 }
-
+// DELETE @@@@@@@@@@@@@@@@@@@@@@@
 export async function DELETE(
   request: Request,
   context: { params: Promise<{ id: string }> }
