@@ -3,7 +3,17 @@ import db from "@/lib/db";
 
 export async function GET() {
   try {
-    const result = await db.query("SELECT * FROM funcionarios ORDER BY id ASC");
+    const result = await db.query(`SELECT 
+  f.id,
+  f.nome,
+  f.endereco,
+  f.dataNascimento,
+  f.salario,
+  f.cargo_id,
+  c.nome AS cargo
+FROM funcionarios f
+JOIN cargos c ON c.id = f.cargo_id;
+`);
     return Response.json(result.rows);
   } catch (err) {
     console.error("GET erro:", err);
