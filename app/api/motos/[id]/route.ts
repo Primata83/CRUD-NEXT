@@ -8,15 +8,16 @@ export async function PUT(
   try {
     const { id } = await context.params;
     const motoId = parseInt(id, 10);
-    const { nome, fabricante_id, cilindrada_id, cor_id } = await request.json();
+    const { nome, fabricante_id, cilindrada_id, cor_id, ano_id } =
+      await request.json();
 
     if (isNaN(motoId)) {
       return Response.json({ error: "ID inválido" }, { status: 400 });
     }
 
     const result = await db.query(
-      "UPDATE modelos SET nome = $1, fabricante_id = $2, cilindrada_id = $3, cor_id = $4 WHERE id = $5 RETURNING id",
-      [nome, fabricante_id, cilindrada_id, cor_id, motoId],
+      "UPDATE modelos SET nome = $1, fabricante_id = $2, cilindrada_id = $3, cor_id = $4 , ano_id = $5 WHERE id = $5 RETURNING id",
+      [nome, fabricante_id, cilindrada_id, cor_id, ano_id],
     );
 
     if (result.rowCount === 0) {
@@ -36,7 +37,7 @@ export async function PUT(
       JOIN fabricante f ON f.id = m.fabricante_id
       JOIN cilindradas c ON c.id = m.cilindrada_id
       JOIN cor co ON co.id = m.cor_id
-      JOIN ano a ON a.id = co.ano_id
+      JOIN ano a ON a.id = m.ano_id
       WHERE m.id = $1`,
       [motoId],
     );

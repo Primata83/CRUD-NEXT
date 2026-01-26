@@ -18,7 +18,7 @@ JOIN cilindradas c
 JOIN cor co 
     ON co.id = m.cor_id
   JOIN ano a
-    ON a.id = co.ano_id
+    ON a.id = m.ano_id
 ORDER BY f.id, m.id;
     `);
     return Response.json(result.rows);
@@ -31,16 +31,22 @@ ORDER BY f.id, m.id;
 // POST @@@@@@@@@@@@@@@@@@@@@@@
 export async function POST(request: Request) {
   try {
-    const { nome, fabricante_id, cilindrada_id, cor_id } = await request.json();
+    const { nome, fabricante_id, cilindrada_id, cor_id, ano_id } =
+      await request.json();
 
     const result = await db.query(
-      "INSERT INTO modelos (nome, fabricante_id, cilindrada_id, cor_id) VALUES ($1, $2, $3, $4) RETURNING id",
-      [nome, fabricante_id, cilindrada_id, cor_id],
+      `
+      INSERT INTO modelos (nome, fabricante_id, cilindrada_id, cor_id, ano_id)
+      VALUES ($1, $2, $3, $4, $5)
+      RETURNING id
+      `,
+      [nome, fabricante_id, cilindrada_id, cor_id, ano_id],
     );
 
     const id = result.rows[0].id;
     const fullData = await db.query(
-      `SELECT
+      `
+      SELECT
         m.id,
         f.fabricante AS fabricante,
         m.nome AS modelo,    
@@ -51,8 +57,9 @@ export async function POST(request: Request) {
       JOIN fabricante f ON f.id = m.fabricante_id
       JOIN cilindradas c ON c.id = m.cilindrada_id
       JOIN cor co ON co.id = m.cor_id
-      JOIN ano a ON a.id = co.ano_id
-      WHERE m.id = $1`,
+      JOIN ano a ON a.id = m.ano_id
+      WHERE m.id = $1
+      `,
       [id],
     );
 
