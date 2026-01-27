@@ -8,8 +8,7 @@ export async function GET() {
   f.nome,
   f.endereco,
   f.dataNascimento,
-  f.salario,
-  f.cargo_id,
+  f.salario,  
   c.nome AS cargo
 FROM funcionarios f
 JOIN cargos c ON c.id = f.cargo_id;
