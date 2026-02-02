@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import { EditarMoto } from "./editarMoto";
 
 type Moto = {
   fabricante: string;
