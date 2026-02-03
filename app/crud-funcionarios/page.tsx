@@ -1,97 +1,116 @@
+"use client";
+import { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
   TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
 
-type funcionario = {
-  funcionario: string;
+interface Funcionario {
+  id: number;
+  nome: string;
   endereco: string;
-  dataNascimento: string;
+  datanascimento: string;
+  salario: number;
   cargo: string;
-  salario: string;
-};
-
-const funcionarios = [
-  {
-    id: 1,
-    nome: "Hudson Cleiton de Paula",
-    endereco: "Rua Marciano Ferreira 244 - Muriaé-MG Boa Familia",
-    datanascimento: "1990-06-19T03:00:00.000Z",
-    salario: 6500,
-    cargo: "Programador",
-  },
-  {
-    id: 2,
-    nome: "Jefersom zem de paula",
-    endereco: "Rua Jose vitor de moura ramos 129 - Taubaté-SP vila bela",
-    datanascimento: "1994-04-21T03:00:00.000Z",
-    salario: 5200,
-    cargo: "Analista",
-  },
-  {
-    id: 3,
-    nome: "Pedro Otavio da Cunha",
-    endereco: "Avenida zangada do foguete tesla 315 - tijuca-RJ caotico",
-    datanascimento: "1993-10-18T02:00:00.000Z",
-    salario: 4800,
-    cargo: "QA",
-  },
-  {
-    id: 4,
-    nome: "João mesquito antonio",
-    endereco: "Avenida marco catroli da cunha 85 - goias-GO Ayrton Senna",
-    datanascimento: "1988-02-22T03:00:00.000Z",
-    salario: 4500,
-    cargo: "Designer",
-  },
-  {
-    id: 5,
-    nome: "Raimundo Ferreira Jorge",
-    endereco: "Avenida das flores 2100 - Guarapari-ES serrado",
-    datanascimento: "1991-08-03T03:00:00.000Z",
-    salario: 4300,
-    cargo: "DevOps",
-  },
-];
+}
 
 export default function Page() {
+  const [funcionarios, setFuncionarios] = useState<Funcionario[]>([]);
+  const [carregando, setCarregando] = useState(true);
+  const [erro, setErro] = useState<string | null>(null);
+
+  async function buscarFuncionarios() {
+    try {
+      setCarregando(true);
+      setErro(null);
+
+      console.log("Buscando funcionários...");
+      const resposta = await fetch("http://localhost:3000/api/funcionarios");
+
+      if (!resposta.ok) {
+        throw new Error(`Erro HTTP: ${resposta.status}`);
+      }
+
+      const data = await resposta.json();
+      console.log("Dados recebidos:", data);
+
+      setFuncionarios(data);
+    } catch (error) {
+      console.error("Erro ao buscar funcionários:", error);
+      setErro(error instanceof Error ? error.message : "Erro desconhecido");
+    } finally {
+      setCarregando(false);
+    }
+  }
+
+  useEffect(() => {
+    buscarFuncionarios();
+  }, []);
+
+  const formatarData = (data: string) => {
+    return new Date(data).toLocaleDateString("pt-BR");
+  };
+
+  const formatarSalario = (salario: number) => {
+    return salario.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+  };
+
   return (
-    <section className="min-h-screen text-center bg-linear-to-r from-orange-700 to-yellow-400 text-white">
-      <h1 className="text-2xl font-bold p-4 text-black">Funcionarios</h1>
-      <Table>
-        <TableCaption>#</TableCaption>
-        <TableHeader>
-          <TableRow className="justify-between items-center ">
-            <TableHead className="w-[100px]">Nome</TableHead>
-            <TableHead>Endereço</TableHead>
-            <TableHead>Data de Nascimento</TableHead>
-            <TableHead className="text-right">Cargo</TableHead>
-            <TableHead className="text-right">Salario</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {funcionarios.map((funcionario) => (
-            <TableRow key={funcionario.id}>
-              <TableCell className="font-medium">{funcionario.nome}</TableCell>
-              <TableCell>{funcionario.endereco}</TableCell>
-              <TableCell>{funcionario.datanascimento}</TableCell>
-              <TableCell>{funcionario.cargo}</TableCell>
-              <TableCell className="text-right">
-                {funcionario.salario}
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-        <TableFooter>
-          <TableRow></TableRow>
-        </TableFooter>
-      </Table>
-    </section>
+    <div className="min-h-screen bg-linear-to-r from-green-700 to-indigo-400 p-6 text-black">
+      <div className="container mx-auto">
+        <h1 className="text-3xl font-bold mb-6">Funcionários</h1>
+        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+          <Table>
+            <TableCaption className="text-gray-400">#HASH</TableCaption>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[100px] text-gray-900 font-bold">
+                  ID
+                </TableHead>
+                <TableHead className="text-gray-900">Nome</TableHead>
+                <TableHead className="text-gray-900">Cargo</TableHead>
+                <TableHead className="text-gray-900">Endereço</TableHead>
+                <TableHead className="text-gray-900">Data Nascimento</TableHead>
+                <TableHead className="text-right text-gray-900">
+                  Salario
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {funcionarios.map((funcionario) => (
+                <TableRow key={funcionario.id} className="">
+                  <TableCell className="font-medium text-gray-900">
+                    {funcionario.id}
+                  </TableCell>
+                  <TableCell className="text-gray-900">
+                    {funcionario.nome}
+                  </TableCell>
+                  <TableCell className="text-gray-900">
+                    {funcionario.cargo}
+                  </TableCell>
+                  <TableCell className="text-gray-900">
+                    {funcionario.endereco}
+                  </TableCell>
+                  <TableCell className="text-gray-900">
+                    {formatarData(funcionario.datanascimento)}
+                  </TableCell>
+                  <TableCell className="text-right text-gray-900">
+                    {formatarSalario(funcionario.salario)}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </div>
+    </div>
   );
 }
