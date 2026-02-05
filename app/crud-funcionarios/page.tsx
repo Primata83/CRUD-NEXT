@@ -64,26 +64,28 @@ export default function Page() {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-r from-green-700 to-indigo-400 p-6 text-black">
-      <div className="container mx-auto">
+    <div className="min-h-screen bg-linear-to-l from-blue-400 to-yellow-400 p-6 text-black">
+      <div className="container mx-auto ">
         <h1 className="text-3xl font-bold mb-6 text-center">Funcionários</h1>
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <Table className="mx-5">
+        <div className="bg-white rounded-lg shadow-lg">
+          <Table className=" ">
             <TableCaption className="text-gray-400">#HASH</TableCaption>
             <TableHeader>
               <TableRow>
-                <TableHead className="text-gray-900 font-bold">ID</TableHead>
+                <TableHead className="text-gray-900 font-bold pl-5">
+                  ID
+                </TableHead>
                 <TableHead className="text-gray-900">Nome</TableHead>
                 <TableHead className="text-gray-900">Cargo</TableHead>
                 <TableHead className="text-gray-900">Endereço</TableHead>
                 <TableHead className="text-gray-900">Data Nascimento</TableHead>
-                <TableHead className=" text-gray-900">Salario</TableHead>
+                <TableHead className="text-gray-900">Salario</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {funcionarios.map((funcionario) => (
-                <TableRow key={funcionario.id} className="">
-                  <TableCell className="font-medium text-gray-900">
+                <TableRow key={funcionario.id}>
+                  <TableCell className="font-medium text-gray-900 pl-5">
                     {funcionario.id}
                   </TableCell>
                   <TableCell className="text-gray-900">

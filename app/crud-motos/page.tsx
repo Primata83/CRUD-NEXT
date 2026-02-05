@@ -45,10 +45,8 @@ export default function Page() {
   return (
     <div className="min-h-screen bg-linear-to-br from-gray-900 to-gray-400 p-6 text-white">
       <div className="max-w-5xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold tracking-wide">
-            Motos da minha trilha
-          </h1>
+        <div className="flex justify-center mb-8">
+          <h1 className="text-3xl font-bold">Motos da Minha Trilha</h1>
         </div>
 
         {!carregando && motos.length > 0 && (
@@ -56,7 +54,7 @@ export default function Page() {
             {motos.map((moto, index) => (
               <div
                 key={index}
-                className="bg-gray-800 rounded-xl shadow-lg p-5 border border-gray-700 hover:border-blue-500 transition-all duration-300 hover:scale-[1.02]"
+                className="bg-gray-800 rounded-xl shadow-lg p-5 border border-gray-700 hover:border-blue-500 transition-all duration-300 hover:scale-[1.06]"
               >
                 <div className="flex flex-col gap-3">
                   <h2 className="text-xl font-semibold">
