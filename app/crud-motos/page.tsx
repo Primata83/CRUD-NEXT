@@ -37,7 +37,6 @@ export default function Page() {
       setCarregando(false);
     }
   }
-
   useEffect(() => {
     buscarMotos();
   }, []);
@@ -48,7 +47,6 @@ export default function Page() {
         <div className="flex justify-center mb-8">
           <h1 className="text-3xl font-bold">Motos da Minha Trilha</h1>
         </div>
-
         {!carregando && motos.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {motos.map((moto, index) => (
@@ -60,7 +58,6 @@ export default function Page() {
                   <h2 className="text-xl font-semibold">
                     {moto.fabricante} {moto.modelo}
                   </h2>
-
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
                       <span className="text-gray-400">Cilindrada:</span>
@@ -68,14 +65,12 @@ export default function Page() {
                         {moto.cilindrada}cc
                       </span>
                     </div>
-
                     <div className="flex justify-between">
                       <span className="text-gray-400">Cor:</span>
                       <span className="text-white font-medium capitalize">
                         {moto.cor}
                       </span>
                     </div>
-
                     <div className="flex justify-between">
                       <span className="text-gray-400">Ano:</span>
                       <span className="text-white font-medium">{moto.ano}</span>

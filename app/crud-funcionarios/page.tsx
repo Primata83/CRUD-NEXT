@@ -65,10 +65,10 @@ export default function Page() {
 
   return (
     <div className="min-h-screen bg-linear-to-l from-blue-400 to-yellow-400 p-6 text-black">
-      <div className="container mx-auto ">
+      <div className="container mx-auto">
         <h1 className="text-3xl font-bold mb-6 text-center">Funcionários</h1>
         <div className="bg-white rounded-lg shadow-lg">
-          <Table className=" ">
+          <Table>
             <TableCaption className="text-gray-400">#HASH</TableCaption>
             <TableHeader>
               <TableRow>
@@ -100,7 +100,7 @@ export default function Page() {
                   <TableCell className="text-gray-900">
                     {formatarData(funcionario.datanascimento)}
                   </TableCell>
-                  <TableCell className=" text-gray-900">
+                  <TableCell className="text-gray-900">
                     {formatarSalario(funcionario.salario)}
                   </TableCell>
                 </TableRow>
